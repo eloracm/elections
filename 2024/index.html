@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Election Results by Precinct</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVXerYJHFm53rpw-N7GYlSpkHEcllS3GY&callback=initMap&libraries=places,geometry&v=weekly"
+        defer></script> -->
+    <script>(g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
+            ({ key: "AIzaSyAVXerYJHFm53rpw-N7GYlSpkHEcllS3GY", v: "weekly" });</script>
+
+    <link rel="stylesheet" type="text/css" href="./map.css" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart', 'bar'] });
+    </script>
+    <script src="./app.js"></script>
+</head>
+
+<body>
+    <div id="pacSearch"></div>
+    <div id="map"></div>
+    <br />
+    <div id="legend">
+        <canvas id="legendCanvas" height="30"></canvas>
+    </div>
+    <div class="row">
+        <div class="column side">
+            <span class="normalText">
+                <span class="normalText">County:</span><br />
+                <input type="radio" id="chester" name="county" value="chester" onclick="switchCounty()" />
+                <label for="chester">Chester County</label>
+                <br />
+                <input type="radio" id="goochland" name="county" value="goochland" onclick="switchCounty()" />
+                <label for="goochland">Goochland County, VA</label>
+                <br />
+                <input type="radio" id="lehigh" name="county" value="lehigh" checked onclick="switchCounty()" />
+                <label for="lehigh">Lehigh County, PA</label>
+                <br />
+                <input type="radio" id="burlington" name="county" value="burlington" onclick="switchCounty()" />
+                <label for="lehigh">Burlington County, NJ</label>
+                <br />
+                <input type="radio" id="montgomery" name="county" value="montgomery" onclick="switchCounty()" />
+                <label for="montgomery">Montgomery County, PA</label>
+                <br />
+                <input type="radio" id="oc" name="county" value="oc" onclick="switchCounty()" />
+                <label for="oc">Orange County, CA</label>
+                <br />
+
+                <input type="radio" id="douglas" name="county" value="douglas" onclick="switchCounty()" />
+                <label for="douglas">Douglas County, CO</label>
+                <br />
+                <input type="radio" id="denver" name="county" value="denver" onclick="switchCounty()" />
+                <label for="denver">Denver County, CO</label>
+                <br />
+            </span>
+            <p />
+            <span class="normalText">
+                Display:<br />
+                <input type="radio" id="results" name="display" value="results" checked onclick="switchDisplay()" />
+                <label for="results">Results</label>
+                <br />
+                <input type="radio" id="turnout" name="display" value="turnout" onclick="switchDisplay()" />
+                <label for="turnout">Voter Turnout</label>
+            </span>
+        </div>
+        <div class="column main">
+            <div id="topTurn"></div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="credits">
+            <a target="_blank" href="https://www.livevoterturnout.com/Orange/LiveResults/en/orangeca.txt">Orange County
+                precinct boundaries</a><br />
+            <a target="_blank" href="https://www.ocvote.com/results/current-election-results">Orange County precinct
+                results</a><br />
+            <a target="_blank" href="https://www.arcgis.com/home/item.html?id=8b6c70f6779246f9af1b9399e292a041">Chester
+                County precinct boundaries</a><br />
+            <a target="_blank" href="https://www.chesco.org/4777/2020-Results-by-Precinct">Chester County results</a>
+            <br />
+            <a target="_blank"
+                href="https://dcdata-dougco.opendata.arcgis.com/datasets/7e3119b4a07b4853a3bce6bdcfb007dc_3/explore?location=39.346523%2C-104.993400%2C10.90">Douglas
+                County precincts</a>
+            <br />
+            <a target="_blank"
+                href="https://opendata-geospatialdenver.hub.arcgis.com/datasets/f730804d9eb34dcca40c161e504367a8_34/explore?location=39.675513%2C-104.767317%2C9.88">Denver
+                County precincts</a>
+            <br />
+            <a target="_blank"
+                href="https://www.arcgis.com/home/item.html?id=ab6c4c46dfea42d49c5c77c077fc06b4&sublayer=0&view=list&sortOrder=desc&sortField=defaultFSOrder#overview">Montgomery
+                County precinct boundaries</a><br />
+            <a target="_blank"
+                href="https://www.arcgis.com/home/item.html?id=bc053e0bced8433a94044ac375ad8963">Montgomery County
+                results</a><br />
+            <a target="_blank"
+                href="https://gis.co.goochland.va.us/arcgis/rest/services/Goochland/MapServer/88">Goochland County
+                precinct boundaries</a>
+            <br />
+            <a target="_blank" href="https://mygeodata.cloud/converter/shp-to-geojson">Shapefile -> GeoJSON
+                converter</a>
+        </div>
+    </div>
+</body>
+
+</html>
