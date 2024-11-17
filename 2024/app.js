@@ -241,7 +241,6 @@ async function initMap() {
     zoom(county);
 
     drawLegend();
-    drawTopTurnout();
 }
 
 initMap();
@@ -283,7 +282,7 @@ function initCounty(county) {
     precincts[county].setMap(map);
     precincts[county].loadGeoJson(geojson, { idPropertyName: 'PRECINCTID' }, function (features) {
         zoom(county);
-        // google.charts.setOnLoadCallback(drawTopTurnout);
+        google.charts.setOnLoadCallback(drawTopTurnout);
     });
     // Color each letter gray. Change the color when the isColorful property
     // is set to true.
