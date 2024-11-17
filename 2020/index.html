@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Election Results by Precinct</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNuGBTxpL0QBWaWCk8Rz6QI9Geknh_1KU&callback=initMap&libraries=places,geometry&v=weekly"
+        defer></script>
+    <link rel="stylesheet" type="text/css" href="./map.css" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart', 'bar'] });
+    </script>
+    <script src="./app.js"></script>
+</head>
+
+<body>
+    <div id="pacSearch"></div>
+    <div id="map"></div>
+    <br />
+    <div id="legend">
+        <canvas id="legendCanvas" height="30"></canvas>
+    </div>
+    <div class="row">
+        <div class="column side">
+            <span class="normalText">
+                <span class="normalText">County:</span><br />
+                <input type="radio" id="chester" name="county" value="chester" checked onclick="switchCounty()" />
+                <label for="chester">Chester County</label>
+                <br />
+                <input type="radio" id="oc" name="county" value="oc" onclick="switchCounty()" />
+                <label for="oc">Orange County, CA</label>
+                <br />
+                <input type="radio" id="montgomery" name="county" value="montgomery" onclick="switchCounty()" />
+                <label for="denver">Montgomery County, PA</label>
+                <br />
+                <input type="radio" id="denver" name="county" value="denver" onclick="switchCounty()" />
+                <label for="denver">Denver County</label>
+            </span>
+            <p />
+            <span class="normalText">
+                Display:<br />
+                <input type="radio" id="results" name="display" value="results" checked onclick="switchDisplay()" />
+                <label for="oc">Results</label>
+                <br />
+                <input type="radio" id="turnout" name="display" value="turnout" onclick="switchDisplay()" />
+                <label for="denver">Voter Turnout</label>
+            </span>
+        </div>
+        <div class="column main">
+            <div id="topTurn"></div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="credits">
+            <a target="_blank" href="https://www.livevoterturnout.com/Orange/LiveResults/en/orangeca.txt">Orange County
+                precinct boundaries</a><br />
+            <a target="_blank" href="https://www.ocvote.com/results/current-election-results">Orange County precinct
+                results</a><br />
+            <a target="_blank" href="https://www.arcgis.com/home/item.html?id=8b6c70f6779246f9af1b9399e292a041">Chester
+                County precinct boundaries</a><br />
+            <a target="_blank" href="https://www.chesco.org/4777/2020-Results-by-Precinct">Chester County results</a>
+            <br />
+            <a target="_blank"
+                href="https://www.arcgis.com/home/item.html?id=450412d55b604caab110055d4156f333&sublayer=0&view=list&sortOrder=desc&sortField=defaultFSOrder#overview">Denver
+                County precinct boundaries</a><br />
+            <a target="_blank"
+                href="https://www.arcgis.com/home/item.html?id=a004a09f0ef0475fb257938603ca27d4&sublayer=0&view=list&sortOrder=desc&sortField=defaultFSOrder#overview">Montgomery
+                County precinct boundaries</a><br />
+            <a target="_blank"
+                href="https://www.arcgis.com/home/item.html?id=bc053e0bced8433a94044ac375ad8963">Montgomery County
+                results</a><br />
+            <a target="_blank"
+                href="https://results.oregonvotes.gov/ResultsSW.aspx?type=CTYALL&cty=26&map=CTY">Multnomah County
+                results</a><br />
+            <a target="_blank"
+                href="https://services2.arcgis.com/McQ0OlIABe29rJJy/ArcGIS/rest/services/precincts/FeatureServer/0">Multnomah
+                County precincts</a><br />
+            <a target="_blank" href="https://mygeodata.cloud/converter/shp-to-geojson">Shapefile -> GeoJSON
+                converter</a>
+        </div>
+    </div>
+</body>
+
+</html>
