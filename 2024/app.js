@@ -199,10 +199,11 @@ const Douglas = { lat: 39.6190480671349, lng: -105.06405515812628 };
 const Carole = { lat: 40.010419972516715, lng: -75.68420487034948 };
 const Alex = { lat: 40.03703315188258, lng: -75.69660451048235 };
 const Waterside = { lat: 40.21896211865368, lng: -75.18219918957182 };
-const Hilltop = { lat: 39.564255806477995, lng: -104.72109136875474 };
+const Hilltop = { lat: 39.55512441307023, lng: -104.73181208707597 };
 const Readers = { lat: 37.662445361044966, lng: -77.6729569261032 };
 const Wexford = { lat: 39.977500644149494, lng: -74.7628979888659 };
 const Whitehall = { lat: 40.615722278431406, lng: -75.55495986000993 };
+const land1 = { lat: 40.7009445134615, lng: -75.58131446000715 };
 
 const markers = [];
 
@@ -235,6 +236,7 @@ async function initMap() {
     markers.push({ county: 'goochland', marker: new AdvancedMarkerElement({ position: Readers, map }) });
     markers.push({ county: 'burlington', marker: new AdvancedMarkerElement({ position: Wexford, map }) });
     markers.push({ county: 'lehigh', marker: new AdvancedMarkerElement({ position: Whitehall, map }) });
+    markers.push({ county: 'lehigh', marker: new AdvancedMarkerElement({ position: land1, map }) });
 
     const county = document.querySelector('input[name="county"]:checked').value;
     initCounty(county);
