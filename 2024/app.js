@@ -600,7 +600,7 @@ function switchCounty() {
     precincts[county].setMap(map);
     zoom(county);
     document.getElementById('topTurn').innerHTML = "";
-    if ('burlington' == county || 'montgomery' == county || 'lehigh' == county || 'chester' == county) {
+    if ('burlington' == county || 'montgomery' == county || 'lehigh' == county || 'chester' == county || 'denver' == county) {
         drawTopTurnout();
     }
     showHideMarkers(county);
@@ -748,8 +748,8 @@ function drawTurnoutLegend() {
 
 function drawTopTurnout() {
     const county = document.querySelector('input[name="county"]:checked').value;
-    if (county != 'burlington' && county != 'montgomery' && county != 'lehigh' && county != 'chester')
-        return;
+    // if (county != 'burlington' && county != 'montgomery' && county != 'lehigh' && county != 'chester')
+    //     return;
 
     const dataArray = [];
 
