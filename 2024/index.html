@@ -16,6 +16,19 @@
         google.charts.load('current', { packages: ['corechart', 'bar'] });
     </script>
     <script src="./app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Get the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Get the value of the parameter you want to use to select the radio button
+            const radioButtonValue = urlParams.get('county');
+
+            // Select the radio button with the matching value
+            $(`input[name="county"][value="${radioButtonValue}"]`).prop('checked', true);
+        });
+    </script>
 </head>
 
 <body>
@@ -29,7 +42,7 @@
         <div class="column side">
             <span class="normalText">
                 <span class="normalText">County:</span><br />
-                <input type="radio" id="chester" name="county" value="chester" checked onclick="switchCounty()" />
+                <input type="radio" id="chester" name="county" value="chester" onclick="switchCounty()" />
                 <label for="chester">Chester County</label>
                 <br />
                 <input type="radio" id="douglas" name="county" value="douglas" onclick="switchCounty()" />
