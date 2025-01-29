@@ -351,7 +351,7 @@ function styleResults(feature) {
     if (trump == undefined || harris == undefined) {
         color = "orange";
     } else if (harris == trump) {
-        color = "orange";
+        color = "LightSlateGrey";
     } else if (harris > trump) {
         const percent = feature.getProperty("harris_percent");
         if (percent >= 80) {
@@ -748,8 +748,8 @@ function drawTurnoutLegend() {
 
 function drawTopTurnout() {
     const county = document.querySelector('input[name="county"]:checked').value;
-    // if (county != 'burlington' && county != 'montgomery' && county != 'lehigh' && county != 'chester')
-    //     return;
+    if (county != 'burlington' && county != 'montgomery' && county != 'lehigh' && county != 'chester' && county != 'denver' && county != 'arapahoe')
+        return;
 
     const dataArray = [];
 
